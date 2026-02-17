@@ -1,3 +1,5 @@
+// Number Guessing Game 
+// Runs is Command Prompt or Terminal
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -11,58 +13,58 @@ public class numberGuessing {
         this.random = new Random(); // Setup random generator for the game
     }
 
-    private void wannaPlay() { //Method: Asking Player if they want to Play 
-        System.out.println("Would you like to Play: Number Guessing? {YES-NO}");//Asking for User Input
-        String playAgain =scanner.nextLine().toUpperCase();//Store user input in Uppercase format
+    private void wannaPlay() { // Method: Asking Player if they want to Play 
+        System.out.println("Would you like to Play: Number Guessing? {YES-NO}"); // Asking for User Input
+        String playAgain =scanner.nextLine().toUpperCase(); // Store user input in Uppercase format
 
-        while(!playAgain.equals("YES") && !playAgain.equals("NO")){//Validate Inputs
+        while(!playAgain.equals("YES") && !playAgain.equals("NO")){ // Validate Inputs
             System.out.println("Please enter a valid response {YES-NO}");
             playAgain =scanner.nextLine().toUpperCase();
         }
 
-        if(playAgain.equals("YES")) {//Start game on "Yes"
+        if(playAgain.equals("YES")) { // Start game on "Yes"
             startGame();
         } else {
-            System.out.println("Program Terminated");//Program End
+            System.out.println("Program Terminated"); // Program End
         }
     }
 
-    private void startGame(){//Game start
-        System.out.println("Insert the minimum range");//Minimum range
-        int minimum = numberGuarantee();// Validating input for minimum is a number
-        System.out.println("Insert the maximum range");//Maximum range
-        int maximum = numberGuarantee();//Validating input for maximum is a number
+    private void startGame(){ // Game start
+        System.out.println("Insert the minimum range"); // Minimum range
+        int minimum = numberGuarantee(); // Validating input for minimum is a number
+        System.out.println("Insert the maximum range"); // Maximum range
+        int maximum = numberGuarantee(); // Validating input for maximum is a number
 
-        int[] computerOptions = IntStream.rangeClosed(minimum,maximum).toArray();//Creating array within the ranges specified
+        int[] computerOptions = IntStream.rangeClosed(minimum,maximum).toArray(); // Creating array within the ranges specified
         int computerNumber = computerOptions[(random.nextInt(computerOptions.length))];
 
         System.out.println("The computer has guess a number from " + minimum + " to " + maximum);
         System.out.println("Guess the number:");
 
-        int playerNumber = numberGuarantee();//Validating User input is a number
+        int playerNumber = numberGuarantee(); // Validating User input is a number
         
         while (playerNumber != computerNumber){
-            compareNumber(playerNumber,computerNumber);//Comparing computer and users number
-            playerNumber = numberGuarantee();//Validating Next User Input
+            compareNumber(playerNumber,computerNumber); // Comparing computer and users number
+            playerNumber = numberGuarantee(); // Validating Next User Input
         }
 
-        if(playerNumber == computerNumber){//Number guessed correctly
+        if(playerNumber == computerNumber){ // Number guessed correctly
             System.out.println("Great Guess you have guessed the computers number");
         }
         anotherRound();
     }
 
-    private int numberGuarantee(){//Mehtod: Making sure inputs are numbers 
-            while (!scanner.hasNextInt()) {//Was the given input a number??
+    private int numberGuarantee(){ // Mehtod: Making sure inputs are numbers 
+            while (!scanner.hasNextInt()) { // Was the given input a number??
             scanner.nextLine(); // Discard the invalid input
-            System.out.println("Please enter a number: ");//Asking for Valid Input
+            System.out.println("Please enter a number: "); // Asking for Valid Input
         }
-        int itsANumber = scanner.nextInt();//Valid input assigned to itsANumber
-        scanner.nextLine();//Cleaning buffer
-        return itsANumber;//Returning Valid input
+        int itsANumber = scanner.nextInt(); // Valid input assigned to itsANumber
+        scanner.nextLine(); // Cleaning buffer
+        return itsANumber; // Returning Valid input
     }
 
-    private void compareNumber(int playerNumber, int computerNumber){//Comparing User Input(Number) to Computer Guess(Number)
+    private void compareNumber(int playerNumber, int computerNumber){ // Mehtod: Comparing User Input(Number) to Computer Guess(Number)
         if(playerNumber < computerNumber){
             System.out.println("higher");
         }
@@ -71,25 +73,25 @@ public class numberGuessing {
         }
     }
 
-    private void anotherRound(){//Method: To Play Again
+    private void anotherRound(){ // Method: To Play Again
 
         System.out.println("\nWould you like to play Again? {YES-NO}");
         String playAgain = scanner.nextLine().toUpperCase();
 
-        while(!playAgain.equals("YES") && !playAgain.equals("NO")){//Validate inputs
+        while(!playAgain.equals("YES") && !playAgain.equals("NO")){ // Validate inputs
                 System.out.println("Please enter a valid response {YES-NO}");
                 playAgain =scanner.nextLine().toUpperCase();
             }
 
-            if(playAgain.equals("YES")){//Restart Game if Input is Yes
+            if(playAgain.equals("YES")){ // Restart Game if Input is Yes
                 startGame();
             } else {
-                System.out.println("Thanks for Playing, See You Next Time");//Program End
+                System.out.println("Thanks for Playing, See You Next Time"); // Program End
             }
     }    
 
-     public static void main(String[] args) throws Exception { //Start of Game
+     public static void main(String[] args) throws Exception { // Start of Game
         numberGuessing game = new numberGuessing();
-        game.wannaPlay(); //Call method: Asking user If they want to play
+        game.wannaPlay(); // Call method: Asking user If they want to play
     }
 }
